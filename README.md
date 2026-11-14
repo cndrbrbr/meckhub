@@ -10,6 +10,9 @@ Eingangswelt für den Lobby-Server: Spielfiguren (Mannequins) und ein Kompass-Me
 Über jeder Figur: Name, Beschreibung, Spieler online (Server-List-Ping alle 10 s). In der Eingangswelt:
 Abenteuermodus, kein Schaden/Hunger, Fall ins Leere → Spawn, Kompass in der Schnellleiste.
 
+**Bauwelten** (`bauwelten:` in der config): Wer `meckhub.bauen.<welt>` oder `meckhub.bauen.*` hat,
+baut dort im Kreativmodus; alle anderen schauen nur zu (Abenteuer, Fliegen, nichts verändern).
+
 Befehle: `/hub` (Spawn), `/hub menue`, Admin: `/hub setspawn`, `/hub figur <spiel> [entfernen]`,
 `/hub liste`, `/hub reload`. Spiele, Skins und Ausrüstung in `config.yml`, Orte in `orte.yml`.
 

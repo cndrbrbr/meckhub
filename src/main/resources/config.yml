@@ -11,6 +11,12 @@ welcome:
   title: "&6&lWillkommen"
   subtitle: "&7Wähle dein Spiel"
 
+# Bauwelten: Wer meckhub.bauen.<welt> hat, baut dort im Kreativmodus; alle anderen
+# schauen nur zu (Abenteuermodus, Fliegen erlaubt, nichts verändern).
+bauwelten:
+  - schulcampus
+  - minion
+
 # Spiele in der Reihenfolge für das Menü.
 #   target: server:<name>            Server im eigenen BungeeCord (Name wie in der BungeeCord-config.yml)
 #           transfer:<host>:<port>   anderer Rechner (Zielserver braucht accepts-transfers=true)
@@ -86,10 +92,19 @@ games:
       hand: COMMAND_BLOCK
   schulcampus:
     name: Schulcampus
-    beschreibung: Der Campus neben der Lobby
+    beschreibung: Unsere Schule zum Anschauen
     target: world:schulcampus
     farbe: "#6ab0ff"
     icon: BOOKSHELF
     skin: default:makena
     ausruestung:
       hand: BOOK
+  minion:
+    name: Minion
+    beschreibung: Kreativwelt zum Anschauen
+    target: world:minion
+    farbe: "#ff7ad9"
+    icon: GRASS_BLOCK
+    skin: default:kai
+    ausruestung:
+      hand: GOLDEN_SHOVEL

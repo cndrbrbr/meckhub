@@ -47,6 +47,7 @@ public final class HubPlugin extends JavaPlugin {
         getServer().getPluginManager().registerEvents(figures, this);
         getServer().getPluginManager().registerEvents(menu, this);
         getServer().getPluginManager().registerEvents(hub, this);
+        getServer().getPluginManager().registerEvents(new BuildWorlds(this), this);
         HubCommand cmd = new HubCommand(this);
         getCommand("hub").setExecutor(cmd);
         getCommand("hub").setTabCompleter(cmd);
