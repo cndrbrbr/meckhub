@@ -174,6 +174,14 @@ public final class HubListener implements Listener {
         });
     }
 
+    /** Figuren nehmen keinen Schaden (Feuer, Explosion, Schläge …). */
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void onFigureDamage(EntityDamageEvent e) {
+        if (plugin.figures().gameOf(e.getEntity()).isPresent()) {
+            e.setCancelled(true);
+        }
+    }
+
     @EventHandler(priority = EventPriority.LOW)
     public void onFigureHit(EntityDamageByEntityEvent e) {
         plugin.figures().gameOf(e.getEntity()).ifPresent(g -> {

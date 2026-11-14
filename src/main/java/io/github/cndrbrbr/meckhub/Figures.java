@@ -120,7 +120,8 @@ public final class Figures implements Listener {
             e.setPersistent(false);
             e.addScoreboardTag(TAG);
             e.setImmovable(true);
-            e.setInvulnerable(true);
+            // Nicht setInvulnerable: das ignoriert Vanilla nur für Kreativ-Spieler, Schläge aus dem
+            // Abenteuermodus kämen dann gar nicht als Event an. Schaden blockiert HubListener.
             e.setSilent(true);
             e.setGravity(false);
             e.setCollidable(false);
