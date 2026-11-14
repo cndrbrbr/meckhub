@@ -64,7 +64,9 @@ public final class HubListener implements Listener {
 
     /** Spieler für die Eingangswelt herrichten. */
     void prepare(Player p) {
-        if (bypass(p)) {
+        boolean builder = plugin.getConfig().getStringList("bauwelten").stream()
+                .anyMatch(w -> w.equalsIgnoreCase(p.getWorld().getName())) && BuildWorlds.canBuild(p, p.getWorld());
+        if (bypass(p) || builder) {
             if (!p.getInventory().contains(Material.COMPASS)) {
                 p.getInventory().addItem(menuItem());
             }

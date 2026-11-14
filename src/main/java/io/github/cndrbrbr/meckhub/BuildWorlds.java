@@ -43,6 +43,10 @@ public final class BuildWorlds implements Listener {
         return plugin.getConfig().getStringList("bauwelten").stream().map(s -> s.toLowerCase(Locale.ROOT)).toList();
     }
 
+    boolean isHub(World w) {
+        return plugin.spawn() != null && w.equals(plugin.spawn().getWorld());
+    }
+
     boolean isBuildWorld(World w) {
         return worlds().contains(w.getName().toLowerCase(Locale.ROOT));
     }
@@ -66,6 +70,8 @@ public final class BuildWorlds implements Listener {
             }
             if (canBuild(p, p.getWorld())) {
                 p.setGameMode(GameMode.CREATIVE);
+            } else if (isHub(p.getWorld())) {
+                return; // Lobby: Abenteuermodus setzt HubListener, ohne Fliegen
             } else {
                 p.setGameMode(GameMode.ADVENTURE);
                 p.setAllowFlight(true);
