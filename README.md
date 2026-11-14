@@ -1,5 +1,7 @@
 # MeckHub
 
+Eingangswelt für den Lobby-Server: Spielfiguren (Mannequins) und ein Kompass-Menü führen zu den Spielen.
+
 | Die Spielfiguren | Brunnen mit Toad in der alten Lobby |
 |---|---|
 | ![Acht Spielfiguren auf Podesten im Halbkreis um den Spawn, über jeder ein Schild mit Name, Beschreibung und Spielerzahl](scrnshts/2026-11-14_13.41.05.png) | ![Weg durch die alte Lobby zum blauen Brunnen mit Toad-Figur, Fesselballon im Hintergrund](scrnshts/2026-11-14_13.43.34.png) |
@@ -7,8 +9,6 @@
 *Echte Screenshots aus der Lobby von meckminecraft.de: links die neue Insel mit den Figuren
 (Minion, MeckTown, BuildContest, OnyxCraft, Inigresso, SoftSurvival, JavaScript, Schulcampus),
 rechts die alte Lobby „SpawnHub“, die über die Brücke angebunden ist.*
-
-Eingangswelt für den Lobby-Server: Spielfiguren (Mannequins) und ein Kompass-Menü führen zu den Spielen.
 
 - `server:<name>` – Server im eigenen BungeeCord-Netz (Plugin-Nachricht „Connect“)
 - `transfer:<host>:<port>` – Server auf anderen Rechnern über den Minecraft-Transfer (ab 1.20.5,
