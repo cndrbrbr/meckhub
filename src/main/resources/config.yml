@@ -36,7 +36,7 @@ games:
       nebenhand: TRIAL_KEY
   mecktown:
     name: MeckTown
-    beschreibung: Unsere Stadt
+    beschreibung: Stadt der Zukunft
     target: server:mc5
     farbe: "#e0a050"
     icon: BRICKS
@@ -57,7 +57,7 @@ games:
       nebenhand: BRICKS
   onyxcraft:
     name: OnyxCraft
-    beschreibung: Abenteuer und Überleben
+    beschreibung: Survival fair
     target: transfer:2.56.99.112:25567
     farbe: "#b07cff"
     icon: OBSIDIAN
