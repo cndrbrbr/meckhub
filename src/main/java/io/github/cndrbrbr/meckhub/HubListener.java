@@ -65,7 +65,7 @@ public final class HubListener implements Listener {
     /** Spieler für die Eingangswelt herrichten. */
     void prepare(Player p) {
         boolean builder = plugin.getConfig().getStringList("bauwelten").stream()
-                .anyMatch(w -> w.equalsIgnoreCase(p.getWorld().getName())) && BuildWorlds.canBuild(p, p.getWorld());
+                .anyMatch(w -> w.equalsIgnoreCase(p.getWorld().getName())) && BuildWorlds.canBuild(p, p.getWorld(), true);
         if (bypass(p) || builder) {
             if (!p.getInventory().contains(Material.COMPASS)) {
                 p.getInventory().addItem(menuItem());
@@ -73,6 +73,8 @@ public final class HubListener implements Listener {
             return;
         }
         p.setGameMode(GameMode.ADVENTURE);
+        p.setFlying(false);
+        p.setAllowFlight(false); // kommt jemand aus Schulcampus/Minion, darf er dort fliegen, hier nicht
         if (plugin.getConfig().getBoolean("clear-inventory", true)) {
             p.getInventory().clear();
         }

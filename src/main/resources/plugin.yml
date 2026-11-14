@@ -16,6 +16,9 @@ permissions:
   meckhub.admin:
     description: Spawn und Figuren setzen, neu laden
     default: op
+  meckhub.lobby.bauen:
+    description: In der Lobby (Eingangswelt) bauen (Kreativmodus) – nur Admins
+    default: op
   meckhub.bauen.*:
     description: In allen Bauwelten bauen (Kreativmodus); einzeln meckhub.bauen.<welt>
     default: op

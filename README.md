@@ -20,6 +20,8 @@ Abenteuermodus, kein Schaden/Hunger, Fall ins Leere → Spawn, Kompass in der Sc
 
 **Bauwelten** (`bauwelten:` in der config): Wer `meckhub.bauen.<welt>` oder `meckhub.bauen.*` hat,
 baut dort im Kreativmodus; alle anderen schauen nur zu (Abenteuer, Fliegen, nichts verändern).
+Steht die Lobby selbst in `bauwelten`, braucht man dort `meckhub.lobby.bauen` (nur Admins); Builder sind in
+der Lobby im Abenteuermodus, WorldEdit-Befehle und -Werkzeuge sind für sie gesperrt.
 
 Befehle: `/hub` (Spawn), `/hub menue`, Admin: `/hub setspawn`, `/hub figur <spiel> [entfernen]`,
 `/hub liste`, `/hub reload`. Spiele, Skins und Ausrüstung in `config.yml`, Orte in `orte.yml`.

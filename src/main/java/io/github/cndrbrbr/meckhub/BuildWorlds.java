@@ -21,7 +21,9 @@ import org.bukkit.event.hanging.HangingBreakByEntityEvent;
 import org.bukkit.event.player.PlayerArmorStandManipulateEvent;
 import org.bukkit.event.player.PlayerBucketEmptyEvent;
 import org.bukkit.event.player.PlayerBucketFillEvent;
+import org.bukkit.command.PluginIdentifiableCommand;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -29,6 +31,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 /**
  * Bauwelten (config: bauwelten): Wer {@code meckhub.bauen.<welt>} hat, baut im Kreativmodus.
+ * In der Lobby selbst gilt stattdessen {@code meckhub.lobby.bauen} (nur Admins).
  * Alle anderen schauen nur zu: Abenteuermodus, Fliegen erlaubt, nichts verändern.
  */
 public final class BuildWorlds implements Listener {
@@ -51,11 +54,21 @@ public final class BuildWorlds implements Listener {
         return worlds().contains(w.getName().toLowerCase(Locale.ROOT));
     }
 
-    /** Darf der Spieler in dieser Welt bauen? */
-    static boolean canBuild(Player p, World w) {
+    /** Recht, in der Eingangswelt (Lobby) zu bauen – nur Admins, nicht Builder. */
+    static final String LOBBY_PERMISSION = "meckhub.lobby.bauen";
+
+    /** Darf der Spieler in dieser Welt bauen? In der Lobby nur mit {@link #LOBBY_PERMISSION}. */
+    static boolean canBuild(Player p, World w, boolean hub) {
+        if (hub) {
+            return p.hasPermission(LOBBY_PERMISSION);
+        }
         // Platzhalter selbst prüfen: Bukkit leitet "meckhub.bauen.*" nicht auf einzelne Welten ab.
         return p.hasPermission("meckhub.bauen.*")
                 || p.hasPermission("meckhub.bauen." + w.getName().toLowerCase(Locale.ROOT));
+    }
+
+    boolean canBuild(Player p, World w) {
+        return canBuild(p, w, isHub(w));
     }
 
     private boolean viewer(Player p) {
@@ -135,7 +148,14 @@ public final class BuildWorlds implements Listener {
     /** Türen, Tore, Knöpfe und Hebel dürfen Zuschauer benutzen, sonst nichts (Truhen, Schilder, Rahmen …). */
     @EventHandler(priority = EventPriority.LOW)
     public void onInteract(PlayerInteractEvent e) {
-        if (!viewer(e.getPlayer()) || e.getClickedBlock() == null) {
+        if (!viewer(e.getPlayer())) {
+            return;
+        }
+        // Werkzeuge (z. B. WorldEdit-Pinsel) wirken nicht; den Kompass öffnet HubListener trotzdem.
+        if (e.getItem() != null) {
+            e.setUseItemInHand(org.bukkit.event.Event.Result.DENY);
+        }
+        if (e.getClickedBlock() == null) {
             return;
         }
         Block b = e.getClickedBlock();
@@ -150,6 +170,33 @@ public final class BuildWorlds implements Listener {
             if (e.getAction() == Action.PHYSICAL) {
                 e.setCancelled(true);
             }
+        }
+    }
+
+    /** WorldEdit-Befehle sind für Zuschauer gesperrt (Builder haben worldedit.* auch in der Lobby). */
+    @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
+    public void onCommand(PlayerCommandPreprocessEvent e) {
+        if (!viewer(e.getPlayer())) {
+            return;
+        }
+        String label = e.getMessage().substring(1).split(" ", 2)[0].toLowerCase(Locale.ROOT);
+        if (isWorldEdit(label)) {
+            e.setCancelled(true);
+            e.getPlayer().sendMessage(ChatColor.RED + "Hier darfst du nichts verändern.");
+        }
+    }
+
+    /** Gehört der Befehl zu WorldEdit? Über die CommandMap, weil WorldEdit seine Befehle dynamisch anmeldet. */
+    static boolean isWorldEdit(String label) {
+        if (label.startsWith("/") || label.startsWith("worldedit:")) {
+            return true; // //set, //wand … und Befehle mit Namensraum
+        }
+        try {
+            Object map = Bukkit.getServer().getClass().getMethod("getCommandMap").invoke(Bukkit.getServer());
+            Object cmd = map.getClass().getMethod("getCommand", String.class).invoke(map, label);
+            return cmd instanceof PluginIdentifiableCommand pc && pc.getPlugin().getName().contains("WorldEdit");
+        } catch (ReflectiveOperationException | RuntimeException ex) {
+            return false;
         }
     }
 
