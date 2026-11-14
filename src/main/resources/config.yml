@@ -1,0 +1,95 @@
+# MeckHub – Eingangswelt
+# Spawn und Figuren setzt man im Spiel: /hub setspawn, /hub figur <spiel> (gespeichert in orte.yml).
+
+# Unter dieser Höhe zurück zum Spawn (Fall ins Leere)
+void-y: 0
+# Inventar beim Betreten leeren (gilt nicht für meckhub.bypass)
+clear-inventory: true
+# Platz des Kompass in der Schnellleiste (0–8)
+menu-slot: 4
+welcome:
+  title: "&6&lWillkommen"
+  subtitle: "&7Wähle dein Spiel"
+
+# Spiele in der Reihenfolge für das Menü.
+#   target: server:<name>            Server im eigenen BungeeCord (Name wie in der BungeeCord-config.yml)
+#           transfer:<host>:<port>   anderer Rechner (Zielserver braucht accepts-transfers=true)
+#           world:<name>             Welt auf diesem Server (z. B. Multiverse)
+#   ping:   Adresse für "x online" (Standard: bei server:<name> der Containername, bei transfer das Ziel;
+#           "none" = keine Abfrage)
+#   skin:   default:<alex|ari|efe|kai|makena|noor|steve|sunny|zuri>[-slim]  oder  player:<Minecraft-Name>
+#   ausruestung: kopf/brust/beine/fuesse/hand/nebenhand: MATERIAL[#rrggbb][@verzierung:muster]
+games:
+  inigresso:
+    name: Inigresso
+    beschreibung: Portale erobern, Links ziehen, Felder aufspannen
+    target: server:mc2
+    farbe: "#7cf04a"
+    icon: LODESTONE
+    skin: default:zuri
+    ausruestung:
+      kopf: LEATHER_HELMET#141414@emerald:silence
+      brust: LEATHER_CHESTPLATE#141414@emerald:silence
+      beine: LEATHER_LEGGINGS#141414@emerald:silence
+      fuesse: LEATHER_BOOTS#141414@emerald:silence
+      hand: AMETHYST_SHARD
+      nebenhand: TRIAL_KEY
+  mecktown:
+    name: MeckTown
+    beschreibung: Unsere Stadt
+    target: server:mc5
+    farbe: "#e0a050"
+    icon: BRICKS
+    skin: default:steve
+    ausruestung:
+      brust: LEATHER_CHESTPLATE#8b5a2b
+      hand: BELL
+  buildcontest:
+    name: BuildContest
+    beschreibung: Bauwettbewerbe
+    target: transfer:2.56.99.112:25566
+    farbe: "#ffd24a"
+    icon: GOLDEN_PICKAXE
+    skin: default:alex
+    ausruestung:
+      kopf: GOLDEN_HELMET
+      hand: GOLDEN_PICKAXE
+      nebenhand: BRICKS
+  onyxcraft:
+    name: OnyxCraft
+    beschreibung: Abenteuer und Überleben
+    target: transfer:2.56.99.112:25567
+    farbe: "#b07cff"
+    icon: OBSIDIAN
+    skin: default:noor
+    ausruestung:
+      brust: NETHERITE_CHESTPLATE@amethyst:spire
+      hand: NETHERITE_SWORD
+  softsurvival:
+    name: SoftSurvival
+    beschreibung: Entspanntes Überleben
+    target: transfer:2.56.99.112:25568
+    farbe: "#8fe3a0"
+    icon: OAK_SAPLING
+    skin: default:sunny
+    ausruestung:
+      kopf: LEATHER_HELMET#8fe3a0
+      hand: POPPY
+  javascript:
+    name: JavaScript programmieren
+    beschreibung: Minecraft mit Code steuern
+    target: transfer:89.58.11.96:25565
+    farbe: "#f7df1e"
+    icon: COMMAND_BLOCK
+    skin: default:efe
+    ausruestung:
+      hand: COMMAND_BLOCK
+  schulcampus:
+    name: Schulcampus
+    beschreibung: Der Campus neben der Lobby
+    target: world:schulcampus
+    farbe: "#6ab0ff"
+    icon: BOOKSHELF
+    skin: default:makena
+    ausruestung:
+      hand: BOOK

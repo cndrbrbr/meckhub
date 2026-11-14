@@ -1,0 +1,21 @@
+name: MeckHub
+version: ${project.version}
+main: io.github.cndrbrbr.meckhub.HubPlugin
+api-version: '26.3'
+author: cndrbrbr
+description: Eingangswelt mit Spielfiguren und Menü zu den Spielen.
+softdepend: [Multiverse-Core]
+
+commands:
+  hub:
+    description: Zurück zum Spawn, Spielmenü, Verwaltung
+    usage: /<command> [menue|setspawn|figur|liste|reload]
+    aliases: [lobby, spawn]
+
+permissions:
+  meckhub.admin:
+    description: Spawn und Figuren setzen, neu laden
+    default: op
+  meckhub.bypass:
+    description: Kein Abenteuermodus und kein Leeren des Inventars in der Eingangswelt
+    default: op
